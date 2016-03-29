@@ -20,6 +20,7 @@ public class TestDijkstraAlgorithm {
         for (int i = 0; i < 11; i++) {
             Vertex location = new Vertex("Node_" + i, "Node_" + i);
             nodes.add(location);
+            System.out.println("Added node:"+i);
         }
 
         addLane("Edge_0", 0, 1, 85);
@@ -39,7 +40,7 @@ public class TestDijkstraAlgorithm {
         DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
         dijkstra.execute(nodes.get(0));
         LinkedList<Vertex> path = dijkstra.getPath(nodes.get(10));
-
+        System.out.println("Path Size:"+path.size());
         for (Vertex vertex : path) {
             System.out.println(vertex);
         }
