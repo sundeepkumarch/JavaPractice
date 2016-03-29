@@ -1,8 +1,10 @@
 package com.mrsun.dijkstra;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -95,5 +97,26 @@ public class DijkstraAlgorithm {
             return d;
         }
     }
+    
+    /*
+   * This method returns the path from the source to the selected target and
+   * NULL if no path exists
+   */
+  public LinkedList<Vertex> getPath(Vertex target) {
+    LinkedList<Vertex> path = new LinkedList<>();
+    Vertex step = target;
+    // check if a path exists
+    if (predecessors.get(step) == null) {
+      return null;
+    }
+    path.add(step);
+    while (predecessors.get(step) != null) {
+      step = predecessors.get(step);
+      path.add(step);
+    }
+    // Put it into the correct order
+    Collections.reverse(path);
+    return path;
+  }
 
 }
