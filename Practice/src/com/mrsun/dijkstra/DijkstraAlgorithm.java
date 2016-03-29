@@ -9,6 +9,7 @@ import java.util.Set;
 
 /**
  * http://www.vogella.com/tutorials/JavaAlgorithmsDijkstra/article.html
+ *
  * @author sundeep
  */
 public class DijkstraAlgorithm {
@@ -34,7 +35,35 @@ public class DijkstraAlgorithm {
         unsettledNodes.add(source);
         while (unsettledNodes.size() > 0) {
             Vertex node = getMinimum(unsettledNodes);
+            settledNodes.add(node);
+            unsettledNodes.remove(node);
+            findMinimalDistances(node);
         }
+    }
+
+    private void findMinimalDistances(Vertex node) {
+        List<Vertex> neighbors = getNeighbors(node);
+        for (Vertex v : neighbors) {
+            if (getShortestDistance(v) > getShortestDistance(node) + getDistance(v, node)) {
+                distance.put(v, getShortestDistance(node) + getDistance(v, node));
+                predecessors.put(v, node);
+                unsettledNodes.add(v);
+            }
+        }
+    }
+
+    private List<Vertex> getNeighbors(Vertex node) {
+        List<Vertex> neighbors = new ArrayList<>();
+        for (Edge edge : edges) {
+            if (edge.getSource().equals(node) && !isSettled(node)) {
+                neighbors.add(edge.getDestination());
+            }
+        }
+        return neighbors;
+    }
+
+    private boolean isSettled(Vertex node) {
+        return settledNodes.contains(node);
     }
 
     private int getDistance(Vertex source, Vertex target) {
@@ -60,9 +89,9 @@ public class DijkstraAlgorithm {
 
     private int getShortestDistance(Vertex v) {
         Integer d = distance.get(v);
-        if(d == null){
+        if (d == null) {
             return Integer.MAX_VALUE;
-        }else{
+        } else {
             return d;
         }
     }
