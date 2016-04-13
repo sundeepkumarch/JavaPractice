@@ -38,7 +38,7 @@ public class PandaAndXOR {
             dataSet.add(in.nextInt());
         }
 
-        Map<Integer, Integer> countMap = new HashMap<>();
+        Map<Long, Integer> countMap = new HashMap<>();
         int result = 0;
 
         for (Set<Integer> set : powerSet(dataSet)) {
@@ -48,7 +48,7 @@ public class PandaAndXOR {
             }
 
             List<Integer> dataList = new ArrayList<>(set);
-            int temp = dataList.get(0);
+            long temp = dataList.get(0);
             for (int i = 1; i < dataList.size(); i++) {
                 temp ^= dataList.get(i);
             }
