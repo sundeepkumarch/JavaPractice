@@ -15,7 +15,7 @@ public class PowerSet {
     public static Set<Set<Integer>> powerSet(Set<Integer> inputSet) {
         Set<Set<Integer>> result = new HashSet<>();
         if (inputSet.isEmpty()) {
-            result.add(new HashSet<>());
+            result.add(new HashSet());
             return result;
         }
         List<Integer> list = new ArrayList<>(inputSet);
