@@ -44,12 +44,12 @@ public class DijkstraAlgorithm {
     }
 
     private void findMinimalDistances(Vertex node) {
-        List<Vertex> neighbors = getNeighbors(node);
-        for (Vertex v : neighbors) {
-            if (getShortestDistance(v) > getShortestDistance(node) + getDistance(v, node)) {
-                distance.put(v, getShortestDistance(node) + getDistance(v, node));
-                predecessors.put(v, node);
-                unsettledNodes.add(v);
+        List<Vertex> adjacentNodes = getNeighbors(node);
+        for (Vertex target : adjacentNodes) {
+            if (getShortestDistance(target) > getShortestDistance(node) + getDistance(node, target)) {
+                distance.put(target, getShortestDistance(node) + getDistance(node, target));
+                predecessors.put(target, node);
+                unsettledNodes.add(target);
             }
         }
     }
@@ -57,7 +57,7 @@ public class DijkstraAlgorithm {
     private List<Vertex> getNeighbors(Vertex node) {
         List<Vertex> neighbors = new ArrayList<>();
         for (Edge edge : edges) {
-            if (edge.getSource().equals(node) && !isSettled(node)) {
+            if (edge.getSource().equals(node) && !isSettled(edge.getDestination())) {
                 neighbors.add(edge.getDestination());
             }
         }
@@ -97,26 +97,26 @@ public class DijkstraAlgorithm {
             return d;
         }
     }
-    
+
     /*
    * This method returns the path from the source to the selected target and
    * NULL if no path exists
-   */
-  public LinkedList<Vertex> getPath(Vertex target) {
-    LinkedList<Vertex> path = new LinkedList<>();
-    Vertex step = target;
-    // check if a path exists
-    if (predecessors.get(step) == null) {
-      return null;
+     */
+    public LinkedList<Vertex> getPath(Vertex target) {
+        LinkedList<Vertex> path = new LinkedList<>();
+        Vertex step = target;
+        // check if a path exists
+        if (predecessors.get(step) == null) {
+            return null;
+        }
+        path.add(step);
+        while (predecessors.get(step) != null) {
+            step = predecessors.get(step);
+            path.add(step);
+        }
+        // Put it into the correct order
+        Collections.reverse(path);
+        return path;
     }
-    path.add(step);
-    while (predecessors.get(step) != null) {
-      step = predecessors.get(step);
-      path.add(step);
-    }
-    // Put it into the correct order
-    Collections.reverse(path);
-    return path;
-  }
 
 }

@@ -5,7 +5,25 @@ import java.util.Scanner;
 public class Solution {
 
     public static void main(String[] args) {
+        //https://www.hackerrank.com/challenges/cavity-map
         Scanner in = new Scanner(System.in);
+        int n = 4;//in.nextInt();
+        String grid[] = {"1112", "1912", "1892", "1234"};//new String[n];
+//        for(int grid_i=0; grid_i < n; grid_i++){
+//            grid[grid_i] = in.next();
+//        }
+        int[][] matrix = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            System.out.println(grid[i]);
+            String[] row = grid[i].split("");
+            for(int j = 0; j < n; j++){
+                matrix[i][j] = Integer.parseInt(row[j]);
+            }
+        }
+        
+    }
+
+    /*
 //        int n = in.nextInt();
         String s = "159357lcfd";//in.next();uwpggr
         int k = 98;//in.nextInt();
@@ -36,5 +54,5 @@ public class Solution {
             sb.append((char) newindex);
         }
         System.out.println(sb.toString());
-    }
+     */
 }
