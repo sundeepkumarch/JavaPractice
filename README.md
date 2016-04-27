@@ -24,6 +24,8 @@ Find algorithm which determines p using smallest number of drops (in worst case)
 (e) N = 10^9, K = 15 (more than hard)
 What is good about this problem: all of these five points (a) - (e) have different solutions.
 
+Given a collection of numbers, print the pair whose sum is X 
+
 PUZZLE: 
 There is a Kingdom, a King, and a Queen. 
 An carnival is scheduled after 35 days in the Kingdom. 
