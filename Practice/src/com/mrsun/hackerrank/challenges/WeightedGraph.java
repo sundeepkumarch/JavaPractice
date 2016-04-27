@@ -111,5 +111,6 @@ public class WeightedGraph {
         wg.addEdge(4,5,2);
         
         System.out.println(wg);
+        System.out.println("Weight:"+wg.getWeight(2, 5));
     }
 }
