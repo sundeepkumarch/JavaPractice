@@ -10,7 +10,7 @@ public class SubsetPattern {
 
     public static void main(String[] args) {
         Scanner is = new Scanner(System.in);
-        String input = is.next();
+        String input = "abc";//is.next();
         String soFar = "";
         recSubsets(soFar, input);
     }
@@ -19,11 +19,11 @@ public class SubsetPattern {
         if (rest.length() == 0) {
             System.out.println(soFar);
         } else {
-            String p1 = soFar + rest.charAt(0);
-            String p2 = rest.substring(1);
-            System.out.println("--> "+p1 + " : " + p2);
-            recSubsets(p1, p2);
-            recSubsets(soFar, p2);
+//            String p1 = soFar + rest.charAt(0);
+//            String p2 = rest.substring(1);
+//            System.out.println("--> "+p1 + " : " + p2);
+            recSubsets(soFar + rest.charAt(0), rest.substring(1));
+            recSubsets(soFar, rest.substring(1));
         }
     }
 }
