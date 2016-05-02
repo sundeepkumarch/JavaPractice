@@ -55,11 +55,7 @@ public class LevelOrderBFS {
             int leftH = height(node.left);
             int rightH = height(node.right);
             //use the larger one
-            if (leftH > rightH) {
-                return leftH + 1;
-            } else {
-                return rightH + 1;
-            }
+            return leftH > rightH ? leftH + 1 : rightH + 1;
         }
     }
 
