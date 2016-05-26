@@ -7,41 +7,34 @@ import java.util.logging.Logger;
  *
  * @author sundechi
  */
-public class PrintTables implements Runnable {
+public class PrintTables {
 
-    int N;
-    boolean check;
-//    private final Object object = new Object();
+    boolean check = false;
 
-    public PrintTables(int n, boolean check) {
-        this.N = n;
-        this.check = check;
-    }
-
-    @Override
-    public void run() {
-        for (int i = 1; i <= 10; i++) {
-            synchronized (this) {
-                System.out.println("checking");
-                if (check) {
-                    System.out.println(N + " x " + i + " = " + i * N);
-                    check = false;
-                    try {
-                        System.out.println("waiting");
-                        wait();
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(PrintTables.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else {
-                    System.out.println(N + " x " + i + " = " + i * N);
-                    check = true;
-                    notify();
-                }
-                
-
+    public synchronized void twoTable(int i) {
+        if (check) {
+            try {
+                wait();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PrintTables.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        System.out.println("--------");
+        System.out.println(2 + " x " + i + " = " + i * 2);
+        check = true;
+        notify();
+    }
+
+    public synchronized void threeTable(int i) {
+        if (!check) {
+            try {
+                wait();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PrintTables.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        System.out.println(3 + " x " + i + " = " + i * 3);
+        check = false;
+        notify();
     }
 
 }

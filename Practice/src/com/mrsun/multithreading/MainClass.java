@@ -7,15 +7,17 @@ package com.mrsun.multithreading;
 public class MainClass {
 
     public static void main(String[] args) throws InterruptedException {
-        //PrintTables
-        PrintTables table2 = new PrintTables(2,true);
-        PrintTables table3 = new PrintTables(3,false);
-        Thread t1 = new Thread(table2);
-        Thread t2 = new Thread(table3);
-        t1.start();
-//        t1.join();
-        t2.start();
-        
+
+        PrintTables t = new PrintTables();
+
+        TwoTableThread t1 = new TwoTableThread(t);
+        ThreeTableThread t2 = new ThreeTableThread(t);
+
+        Thread thread1 = new Thread(t1, "TwoTableThread");
+        Thread thread2 = new Thread(t2, "ThreeTableThread");
+
+        thread1.start();
+        thread2.start();
     }
 
 }
