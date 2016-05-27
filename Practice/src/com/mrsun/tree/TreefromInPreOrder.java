@@ -10,15 +10,21 @@ public class TreefromInPreOrder {
     static int preIndex = 0;
 
     public static Node buildTree(int[] in, int[] pre, int start, int end) {
+
+        // Base case
         if (start > end) {
             return null;
         }
-        Node node = new Node(pre[preIndex]);
+        Node node = new Node(pre[preIndex++]);
+
+        //If this node has no children then return 
         if (start == end) {
             return node;
         }
+        //Else find the index of this node in Inorder traversal
         int inIndex = search(in, start, end, node.data);
-
+        
+        //Using index in Inorder traversal, construct left and right subtress
         node.left = buildTree(in, pre, start, inIndex - 1);
         node.right = buildTree(in, pre, inIndex + 1, end);
 
@@ -43,11 +49,11 @@ public class TreefromInPreOrder {
         System.out.print(node.data + " ");
         printInorder(node.right);
     }
-    
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         int[] in = {};
         int[] pre = {};
-        Node n = buildTree(in, pre, 0, in.length-1);
+        Node n = buildTree(in, pre, 0, in.length - 1);
         printInorder(n);
     }
 }
